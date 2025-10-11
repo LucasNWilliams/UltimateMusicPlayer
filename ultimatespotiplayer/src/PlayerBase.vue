@@ -1,9 +1,9 @@
 <template>
-<PlayerBase/>
+<h1>Hello World</h1>
 </template>
 
 <script setup lang="ts">
-import PlayerBase from "@/PlayerBase.vue";
+
 </script>
 
 <style scoped>
