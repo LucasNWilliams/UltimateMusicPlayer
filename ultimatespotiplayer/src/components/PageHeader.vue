@@ -14,7 +14,6 @@
 import {IPageHeaderProps} from "@/enums";
 
 const props = defineProps<IPageHeaderProps>()
-console.log(props.spotifyUser.images)
 </script>
 
 <style scoped>
@@ -30,7 +29,6 @@ console.log(props.spotifyUser.images)
   color: white;
   position: sticky;
   top: 0;
-
 
   .page-header-right {
     display: flex;

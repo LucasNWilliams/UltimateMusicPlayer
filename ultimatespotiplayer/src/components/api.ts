@@ -1,4 +1,4 @@
-import {ISpotifyPlaylistType} from "@/enums";
+import {ISpotifyAlbumType, ISpotifyPlaylistType, IUserAlbumType} from "@/enums";
 
 const spotifyUrl = 'https://api.spotify.com/v1'
 let accessToken: string | null
@@ -27,17 +27,17 @@ const GetUserData = async () => {
     })
 }
 
-interface IPlaylistsDataType {
-  href: string,
-  items: ISpotifyPlaylistType[]
-  limit: number,
-  next: string | null,
-  offset: number,
-  previous: string | null,
-  total: number
-}
+// interface IPlaylistsDataType {
+//   href: string,
+//   items: ISpotifyPlaylistType[]
+//   limit: number,
+//   next: string | null,
+//   offset: number,
+//   previous: string | null,
+//   total: number
+// }
 
-const GetUserPlaylists = async (url = spotifyUrl + '/me/playlists', playlists = []): Promise<void | IPlaylistsDataType | never[]> => {
+const GetUserPlaylists = async (url = spotifyUrl + '/me/playlists', playlists: ISpotifyPlaylistType[] = []): Promise<void | ISpotifyPlaylistType[] | never[]> => {
   return await fetch(url, {
     headers: {
       Authorization: 'Bearer ' + accessToken,
@@ -50,8 +50,8 @@ const GetUserPlaylists = async (url = spotifyUrl + '/me/playlists', playlists = 
         throw await response.json()
       }
     })
+    // TODO Make so it returns then runs after
     .then((data) => {
-      console.log(data)
       playlists.push(...data.items)
       if (data.next) {
         return GetUserPlaylists(data.next, playlists)
@@ -64,7 +64,44 @@ const GetUserPlaylists = async (url = spotifyUrl + '/me/playlists', playlists = 
     })
 }
 
+// interface IAlbumsDataType {
+//   href: string,
+//   items: ISpotifyAlbumType[]
+//   limit: number,
+//   next: string | null,
+//   offset: number,
+//   previous: string | null,
+//   total: number
+// }
+
+const GetUserAlbums = async (url = spotifyUrl + '/me/albums', albums: ISpotifyAlbumType[] = []): Promise<void | IUserAlbumType[] | never[]> => {
+  return await fetch(url, {
+    headers: {
+      Authorization: 'Bearer ' + accessToken,
+    }
+  })
+  .then(async (response) => {
+    if (response.ok) {
+      return response.json()
+    } else {
+      throw await response.json()
+    }
+  })
+    .then((data) => {
+      albums.push(...data.items)
+      if (data.next) {
+        return GetUserAlbums(data.next, albums)
+      } else {
+        return albums
+      }
+    })
+    .catch((error) => {
+      console.error("Could not get user albums:", error)
+    })
+}
+
 export {
   GetUserData,
-  GetUserPlaylists
+  GetUserPlaylists,
+  GetUserAlbums
 }

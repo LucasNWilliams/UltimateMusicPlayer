@@ -16,8 +16,8 @@
 <script setup lang="ts">
 import {onMounted, ref} from 'vue'
 import { GetSpotifyAuthorization } from "@/API/spotifyAuth";
-import {ISpotifyPlaylistType, ISpotifyUserType} from "@/enums";
-import {GetUserData, GetUserPlaylists} from "@/components/api";
+import {ISpotifyPlaylistType, ISpotifyUserType, IUserAlbumType} from "@/enums";
+import {GetUserData, GetUserPlaylists, GetUserAlbums} from "@/components/api";
 import PageHeader from "@/components/PageHeader.vue";
 
 const spotifyUser = ref<ISpotifyUserType>({})
@@ -38,11 +38,19 @@ const getUserPlaylists = async () => {
     })
 }
 
+const getUserAlbums = async () => {
+  await GetUserAlbums()
+    .then((data: IUserAlbumType[]) => {
+      console.log(data)
+    })
+}
+
 onMounted(async () => {
   await GetSpotifyAuthorization()
     .then(async () => {
       await getUserData()
       await getUserPlaylists()
+      await getUserAlbums()
     })
 })
 </script>
