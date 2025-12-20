@@ -1,15 +1,15 @@
 <template>
   <div v-if="spotifyUser.display_name">
-    <div>
-      <h1>Welcome {{ spotifyUser.display_name }}</h1>
-      <img :src="spotifyUser.images ? spotifyUser.images[1].url : null" alt="Profile image" class="user-profile-image">
+    <PageHeader :spotify-user="spotifyUser"/>
+
+    <div class="page-body">
+      <h2>Total Followers: {{ spotifyUser.followers.total }}</h2>
+      <ol>
+        <li v-for="track in userPlaylists" :key="track.id">
+          {{ track.name }}
+        </li>
+      </ol>
     </div>
-    <h2>Total Followers: {{ spotifyUser.followers.total }}</h2>
-    <ol>
-      <li v-for="track in userPlaylists" :key="track.id">
-        {{ track.name }}
-      </li>
-    </ol>
   </div>
 </template>
 
@@ -18,6 +18,7 @@ import {onMounted, ref} from 'vue'
 import { GetSpotifyAuthorization } from "@/API/crud.js";
 import {ISpotifyPlaylistType, ISpotifyUserType} from "@/enums";
 import {GetUserData, GetUserPlaylists} from "@/components/api";
+import PageHeader from "@/components/PageHeader.vue";
 
 const spotifyUser = ref<ISpotifyUserType>({})
 const userPlaylists = ref<ISpotifyPlaylistType[]>([])
@@ -47,7 +48,7 @@ onMounted(async () => {
 </script>
 
 <style scoped>
-.user-profile-image {
-  border-radius: 50%;
+.page-body {
+  scrollbar-width: none;
 }
 </style>

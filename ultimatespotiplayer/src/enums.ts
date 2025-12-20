@@ -52,3 +52,7 @@ export interface ISpotifyPlaylistType {
   type: string,
   uri: string
 }
+
+export interface IPageHeaderProps {
+  spotifyUser: ISpotifyUserType
+}
