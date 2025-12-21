@@ -27,7 +27,7 @@ interface ISpotifyFollowersType {
   total: number
 }
 
-interface ISpotifyImageType {
+export interface ISpotifyImageType {
   height: number,
   url: string,
   width: number
@@ -120,7 +120,11 @@ export interface ISpotifyPlaylistType {
   snapshot_id: string,
   tracks: {
     href: string,
-    total: number
+    total: number,
+    items: ISpotifyTrackType[],
+    limit: number,
+    next: string,
+    previous: string
   },
   type: string,
   uri: string

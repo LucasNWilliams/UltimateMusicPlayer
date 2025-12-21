@@ -1,7 +1,7 @@
 <template>
   <div class="page-header">
     <div class="page-header-left">
-      <img src="@/assets/mediumLogo.png" alt="Medium Ultimate SpotiPlayer Logo" class="logo-medium"/>
+      <img src="../../assets/mediumLogo.png" alt="Medium Ultimate SpotiPlayer Logo" class="logo-medium"/>
     </div>
     <div class="page-header-right">
       <p>{{ spotifyUser.display_name }}</p>
@@ -25,7 +25,7 @@ const props = defineProps<IPageHeaderProps>()
   padding: 1.25rem 2.5rem;
   margin: -.5rem -.5rem 1.5rem;
   height: 1.75rem;
-  background-color: #3e3e3e;
+  background-color: #282c34;
   color: white;
   position: sticky;
   top: 0;
