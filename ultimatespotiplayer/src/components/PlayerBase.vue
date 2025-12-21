@@ -3,13 +3,12 @@
     <PageHeader :spotify-user="spotifyUser"/>
 
     <div class="page-body">
-      <h2>Total Followers: {{ spotifyUser.followers.total }}</h2>
       <ul class="library-list">
         <li v-for="item in userLibrary" :key="item.id">
-          <PlaylistCard v-if="instanceOfPlaylist(item)"
-                        :playlist="item"/>
-          <AlbumCard v-else-if="instanceOfAlbum(item)"
+          <AlbumCard v-if="instanceOfAlbum(item)"
                      :album="item"/>
+          <PlaylistCard v-else-if="instanceOfPlaylist(item)"
+                        :playlist="item"/>
         </li>
       </ul>
     </div>
@@ -66,10 +65,10 @@ const getUserAlbums = async () => {
 
 onMounted(async () => {
   await GetSpotifyAuthorization()
-    .then(async () => {
-      await getUserData()
-      await getUserPlaylists()
-      await getUserAlbums()
+    .then(() => {
+      getUserData()
+      getUserPlaylists()
+      getUserAlbums()
     })
 })
 </script>
