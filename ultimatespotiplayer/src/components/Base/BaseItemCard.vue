@@ -8,8 +8,13 @@
            class="cover-image"/>
       <h1>{{ title }}</h1>
     </div>
-    <div class="artists">
-      <p>{{ artistsNames }}</p>
+    <div class="bottom-line">
+      <div class="artists">
+        <p>{{ artistsNames }}</p>
+      </div>
+      <div class="item-type-div" v-if="itemType">
+        <p class="item-type">{{ itemType }}</p>
+      </div>
     </div>
   </div>
 </template>
@@ -29,7 +34,6 @@ const artistsNames = props.artists.join(', ')
   border-width: .25rem;
   padding: .5rem 1rem;
   margin: 1rem;
-  color: white;
   background-color: #252930;
   width: 24rem;
 
@@ -54,10 +58,23 @@ const artistsNames = props.artists.join(', ')
     }
   }
 
-  .artists {
+  .bottom-line {
     display: flex;
-    //flex-direction: column;
-    gap: .5rem;
+    justify-content: space-between;
+    align-items: end;
+
+    .artists {
+      display: flex;
+      gap: .5rem;
+    }
+
+    .item-type-div {
+      .item-type {
+        text-transform: capitalize;
+        font-size: 12px;
+      }
+    }
   }
+
 }
 </style>

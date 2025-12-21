@@ -1,11 +1,13 @@
 <template>
-  <BaseCard :title="album.album.name"
+  <BaseItemCard :title="album.album.name"
             :artists="albumArtists"
-            :image="albumImage"/>
+            :image="albumImage"
+            :item-type="album.album.album_type">
+  </BaseItemCard>
 </template>
 
 <script setup lang="ts">
-import BaseCard from "@/components/Base/BaseCard.vue";
+import BaseItemCard from "@/components/Base/BaseItemCard.vue";
 import {IAlbumCardProps} from "@/components/Layout/enums";
 import {ISpotifyArtistType, ISpotifyImageType} from "@/enums";
 import {computed} from "vue";

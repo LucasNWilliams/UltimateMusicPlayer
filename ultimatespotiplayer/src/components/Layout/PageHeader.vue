@@ -26,7 +26,6 @@ const props = defineProps<IPageHeaderProps>()
   margin: -.5rem -.5rem 1.5rem;
   height: 1.75rem;
   background-color: #282c34;
-  color: white;
   position: sticky;
   top: 0;
 
