@@ -11,7 +11,11 @@
 </template>
 
 <script setup lang="ts">
-import {IPageHeaderProps} from "@/spotifyDataTypeEnums";
+import {ISpotifyUser} from "@/spotifyDataTypeEnums";
+
+interface IPageHeaderProps {
+  spotifyUser: ISpotifyUser
+}
 
 const props = defineProps<IPageHeaderProps>()
 </script>

@@ -27,16 +27,6 @@ const GetUserData = async () => {
     })
 }
 
-// interface IPlaylistsDataType {
-//   href: string,
-//   items: ISpotifyPlaylist[]
-//   limit: number,
-//   next: string | null,
-//   offset: number,
-//   previous: string | null,
-//   total: number
-// }
-
 const GetUserPlaylists = async (url = spotifyUrl + '/me/playlists', playlists: ISpotifyPlaylist[] = []): Promise<void | ISpotifyPlaylist[] | never[]> => {
   return await fetch(url, {
     headers: {
@@ -63,16 +53,6 @@ const GetUserPlaylists = async (url = spotifyUrl + '/me/playlists', playlists: I
       console.error("Could not get user playlists:", error)
     })
 }
-
-// interface IAlbumsDataType {
-//   href: string,
-//   items: ISpotifyAlbum[]
-//   limit: number,
-//   next: string | null,
-//   offset: number,
-//   previous: string | null,
-//   total: number
-// }
 
 const GetUserAlbums = async (url = spotifyUrl + '/me/albums', albums: ISpotifyAlbum[] = []): Promise<void | IUserAlbum[] | never[]> => {
   return await fetch(url, {

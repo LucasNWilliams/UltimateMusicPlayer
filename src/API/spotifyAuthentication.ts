@@ -1,4 +1,3 @@
-import type {IApiPayloadType, IApiResponseType} from "@/API/enums.ts";
 import {GetUserData} from "@/components/api";
 
 const clientId = '24e4d5e0bf7a4e56b2d6ef4a9afe0817'
@@ -68,11 +67,19 @@ const redirectToSpotifyAuthorizeEndpoint = async () => {
       })
 }
 
+interface IApiPayload {
+  method: string,
+  headers: {
+    ['Content-Type']: string
+  },
+  body: URLSearchParams
+}
+
 const exchangeToken = async (code: string) => {
   const codeVerifier = localStorage.getItem('code_verifier')
 
   const url = 'https://accounts.spotify.com/api/token'
-  const payload: IApiPayloadType = {
+  const payload: IApiPayload = {
     method: 'POST',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
@@ -106,7 +113,13 @@ const addThrowErrorToFetch = async (response: Response) => {
   }
 }
 
-const processTokenResponse = (data: IApiResponseType) => {
+interface IApiResponse {
+  access_token: string,
+  refresh_token: string,
+  expires_in: number,
+}
+
+const processTokenResponse = (data: IApiResponse) => {
   accessToken = data.access_token
   refreshToken = data.refresh_token
 

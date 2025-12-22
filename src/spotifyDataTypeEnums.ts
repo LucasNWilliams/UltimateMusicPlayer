@@ -63,6 +63,16 @@ export interface ISpotifyTrack {
   is_local: boolean
 }
 
+export interface ISpotifyAlbumsData {
+  href: string,
+  items: ISpotifyAlbum[]
+  limit: number,
+  next: string | null,
+  offset: number,
+  previous: string | null,
+  total: number
+}
+
 export interface IUserAlbum {
   added_at: string,
   album: ISpotifyAlbum
@@ -90,6 +100,15 @@ export interface ISpotifyAlbum {
   popularity: number
 }
 
+export interface ISpotifyPlaylistsData {
+  href: string,
+  items: ISpotifyPlaylist[]
+  limit: number,
+  next: string | null,
+  offset: number,
+  previous: string | null,
+  total: number
+}
 
 export interface ISpotifyPlaylist {
   collaborative: boolean,
@@ -128,4 +147,7 @@ export interface ISpotifyUser {
   product: string,
   type: string,
   uri: string
+}
+
+export class IPageHeaderProps {
 }
