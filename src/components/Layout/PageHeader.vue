@@ -11,7 +11,7 @@
 </template>
 
 <script setup lang="ts">
-import {IPageHeaderProps} from "@/enums";
+import {IPageHeaderProps} from "@/spotifyDataTypeEnums";
 
 const props = defineProps<IPageHeaderProps>()
 </script>

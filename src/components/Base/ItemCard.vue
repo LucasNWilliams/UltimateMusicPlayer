@@ -20,7 +20,15 @@
 </template>
 
 <script setup lang="ts">
-import {IBaseCardProps} from "@/components/Base/enums";
+import {ISpotifyImage} from "@/spotifyDataTypeEnums";
+
+interface IBaseCardProps {
+  title: string
+  artists: string[]
+  image: ISpotifyImage
+  itemType?: string
+}
+
 const props = defineProps<IBaseCardProps>()
 
 const artistsNames = props.artists.join(', ')

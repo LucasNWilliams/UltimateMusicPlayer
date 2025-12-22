@@ -1,4 +1,4 @@
-import {ISpotifyAlbumType, ISpotifyPlaylistType, IUserAlbumType} from "@/enums";
+import {ISpotifyAlbum, ISpotifyPlaylist, IUserAlbum} from "@/spotifyDataTypeEnums";
 
 const spotifyUrl = 'https://api.spotify.com/v1'
 let accessToken: string | null
@@ -29,7 +29,7 @@ const GetUserData = async () => {
 
 // interface IPlaylistsDataType {
 //   href: string,
-//   items: ISpotifyPlaylistType[]
+//   items: ISpotifyPlaylist[]
 //   limit: number,
 //   next: string | null,
 //   offset: number,
@@ -37,7 +37,7 @@ const GetUserData = async () => {
 //   total: number
 // }
 
-const GetUserPlaylists = async (url = spotifyUrl + '/me/playlists', playlists: ISpotifyPlaylistType[] = []): Promise<void | ISpotifyPlaylistType[] | never[]> => {
+const GetUserPlaylists = async (url = spotifyUrl + '/me/playlists', playlists: ISpotifyPlaylist[] = []): Promise<void | ISpotifyPlaylist[] | never[]> => {
   return await fetch(url, {
     headers: {
       Authorization: 'Bearer ' + accessToken,
@@ -66,7 +66,7 @@ const GetUserPlaylists = async (url = spotifyUrl + '/me/playlists', playlists: I
 
 // interface IAlbumsDataType {
 //   href: string,
-//   items: ISpotifyAlbumType[]
+//   items: ISpotifyAlbum[]
 //   limit: number,
 //   next: string | null,
 //   offset: number,
@@ -74,7 +74,7 @@ const GetUserPlaylists = async (url = spotifyUrl + '/me/playlists', playlists: I
 //   total: number
 // }
 
-const GetUserAlbums = async (url = spotifyUrl + '/me/albums', albums: ISpotifyAlbumType[] = []): Promise<void | IUserAlbumType[] | never[]> => {
+const GetUserAlbums = async (url = spotifyUrl + '/me/albums', albums: ISpotifyAlbum[] = []): Promise<void | IUserAlbum[] | never[]> => {
   return await fetch(url, {
     headers: {
       Authorization: 'Bearer ' + accessToken,

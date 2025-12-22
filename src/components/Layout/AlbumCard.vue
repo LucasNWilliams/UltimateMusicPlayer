@@ -1,26 +1,29 @@
 <template>
-  <BaseItemCard :title="album.album.name"
+  <ItemCard :title="album.album.name"
             :artists="albumArtists"
             :image="albumImage"
             :item-type="album.album.album_type">
-  </BaseItemCard>
+  </ItemCard>
 </template>
 
 <script setup lang="ts">
-import BaseItemCard from "@/components/Base/BaseItemCard.vue";
-import {IAlbumCardProps} from "@/components/Layout/enums";
-import {ISpotifyArtistType, ISpotifyImageType} from "@/enums";
+import ItemCard from "@/components/Base/ItemCard.vue";
+import {ISpotifyArtist, ISpotifyImage, IUserAlbum} from "@/spotifyDataTypeEnums";
 import {computed} from "vue";
+
+interface IAlbumCardProps {
+  album: IUserAlbum
+}
 
 const props = defineProps<IAlbumCardProps>()
 
 const albumImage = computed(() => {
-  return props.album.album.images ? props.album.album.images[0] : {} as ISpotifyImageType
+  return props.album.album.images ? props.album.album.images[0] : {} as ISpotifyImage
 })
 
 const albumArtists = computed(() => {
   const artistNames: string[] = []
-  props.album.album.artists.forEach((artist: ISpotifyArtistType) => artistNames.push(artist.name))
+  props.album.album.artists.forEach((artist: ISpotifyArtist) => artistNames.push(artist.name))
   return artistNames
 })
 

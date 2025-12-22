@@ -17,24 +17,24 @@
 
 <script setup lang="ts">
 import {defineAsyncComponent, onMounted, ref} from 'vue'
-import { GetSpotifyAuthorization } from "@/API/spotifyAuth";
-import {ISpotifyAlbumType, ISpotifyPlaylistType, ISpotifyUserType, IUserAlbumType} from "@/enums";
+import { GetSpotifyAuthorization } from "@/API/spotifyAuthentication";
+import {ISpotifyAlbum, ISpotifyPlaylist, ISpotifyUser, IUserAlbum} from "@/spotifyDataTypeEnums";
 import {GetUserData, GetUserPlaylists, GetUserAlbums} from "@/components/api";
 import PageHeader from "@/components/Layout/PageHeader.vue";
 
 const AlbumCard = defineAsyncComponent(() => import("@/components/Layout/AlbumCard.vue"))
 const PlaylistCard = defineAsyncComponent(() => import("@/components/Layout/PlaylistCard.vue"))
 
-const spotifyUser = ref<ISpotifyUserType>({})
-const userPlaylists = ref<ISpotifyPlaylistType[]>([])
-const userAlbums = ref<IUserAlbumType[]>([])
-const userLibrary = ref<(ISpotifyPlaylistType | IUserAlbumType)[]>([])
+const spotifyUser = ref<ISpotifyUser>({})
+const userPlaylists = ref<ISpotifyPlaylist[]>([])
+const userAlbums = ref<IUserAlbum[]>([])
+const userLibrary = ref<(ISpotifyPlaylist | IUserAlbum)[]>([])
 
-const instanceOfPlaylist = (item: ISpotifyPlaylistType | ISpotifyAlbumType): item is ISpotifyPlaylistType => {
+const instanceOfPlaylist = (item: ISpotifyPlaylist | ISpotifyAlbum): item is ISpotifyPlaylist => {
   return 'owner' in item
 }
 
-const instanceOfAlbum = (item: ISpotifyPlaylistType | ISpotifyAlbumType): item is ISpotifyAlbumType => {
+const instanceOfAlbum = (item: ISpotifyPlaylist | ISpotifyAlbum): item is ISpotifyAlbum => {
   return 'album' in item
 }
 
@@ -47,7 +47,7 @@ const getUserData = async () => {
 
 const getUserPlaylists = async () => {
   await GetUserPlaylists()
-    .then((data: ISpotifyPlaylistType[]) => {
+    .then((data: ISpotifyPlaylist[]) => {
       userPlaylists.value.length = 0
       userPlaylists.value.push(...data)
       userLibrary.value = [...userAlbums.value, ...userPlaylists.value]
@@ -56,7 +56,7 @@ const getUserPlaylists = async () => {
 
 const getUserAlbums = async () => {
   await GetUserAlbums()
-    .then((data: IUserAlbumType[]) => {
+    .then((data: IUserAlbum[]) => {
       userAlbums.value.length = 0
       userAlbums.value.push(...data)
       userLibrary.value = [...userAlbums.value, ...userPlaylists.value]

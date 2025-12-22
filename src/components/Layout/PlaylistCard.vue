@@ -1,21 +1,24 @@
 <template>
-  <BaseItemCard :title="playlist.name"
+  <ItemCard :title="playlist.name"
             :artists="[playlist.owner.display_name]"
             :image="playlistImage"
             :item-type="playlistItemType"/>
 </template>
 
 <script setup lang="ts">
-import BaseItemCard from "@/components/Base/BaseItemCard.vue";
-import {IPlaylistCardProps} from "@/components/Layout/enums";
-import {ISpotifyImageType} from "@/enums";
+import ItemCard from "@/components/Base/ItemCard.vue";
+import {ISpotifyImage, ISpotifyPlaylist} from "@/spotifyDataTypeEnums";
 import {computed} from "vue";
+
+interface IPlaylistCardProps {
+  playlist: ISpotifyPlaylist
+}
 
 const props = defineProps<IPlaylistCardProps>()
 const playlistItemType = 'Playlist'
 
 const playlistImage = computed(() => {
-  return props.playlist.images ? props.playlist.images[0] : {} as ISpotifyImageType
+  return props.playlist.images ? props.playlist.images[0] : {} as ISpotifyImage
 })
 
 </script>
